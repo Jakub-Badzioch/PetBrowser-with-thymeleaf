@@ -8,21 +8,11 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @Component
-public class ByAgeBrowser implements SpecificBrowser {
-    public List<Animal> browse(List<Animal> animals) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wyszukaj po wieku zwierzaka: (tak/nie)");
-        String answer = scanner.nextLine();
-        if (answer.equals("tak")) {
-            System.out.println("Wiek od:");
-            double youngest = scanner.nextDouble();
-            System.out.println("Wiek do:");
-            double oldest = scanner.nextDouble();
+public class ByAgeBrowser {
+    public List<Animal> browse(List<Animal> animals, double oldest, double youngest) {
             return animals.stream()
                     .filter(a -> a.getAge() >= youngest)
                     .filter(a -> a.getAge() <= oldest)
                     .collect(Collectors.toList());
-        }
-        return animals;
     }
 }

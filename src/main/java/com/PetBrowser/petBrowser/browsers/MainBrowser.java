@@ -30,15 +30,12 @@ public class MainBrowser {
     }
 
 
-    public void browse() {
-        System.out.println("Wyszukaj zwierzaka");
-        List<Animal> animalsFound = bySpeciesBrowser.browse(animals);
-        animalsFound = byRaceBrowser.browse(animalsFound);
-        animalsFound = byAgeBrowser.browse(animalsFound);
-        animalsFound = bySexBrowser.browse(animalsFound);
-        animalsFound = byLocationBrowser.browse(animalsFound);
-        for (Animal animal : animalsFound) {
-            System.out.println(animal);
-        }
+    public List<Animal> browse(String species, String race, String sex, double oldest, double youngest, String country) {
+        List<Animal> animalsFound = bySpeciesBrowser.browse(animals, species);
+        animalsFound = byRaceBrowser.browse(animalsFound, race);
+        animalsFound = byAgeBrowser.browse(animalsFound, oldest, youngest);
+        animalsFound = bySexBrowser.browse(animalsFound, sex);
+        animalsFound = byLocationBrowser.browseByCountry(animalsFound, country);
+        return animalsFound;
     }
 }

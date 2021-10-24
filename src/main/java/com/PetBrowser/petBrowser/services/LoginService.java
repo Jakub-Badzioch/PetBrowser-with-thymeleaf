@@ -1,5 +1,6 @@
 package com.PetBrowser.petBrowser.services;
 
+import com.PetBrowser.petBrowser.exceptions.UserDoesntExistsException;
 import com.PetBrowser.petBrowser.repositories.UserRepository;
 import com.PetBrowser.petBrowser.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,35 +8,34 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Scanner;
-
 @Service
 public class LoginService {
     private final UserRepository userRepository;
-
+    // todo do poprawy poniewaz moze byc tylko jeden zalogowany uzytkownik naraz
+    // rozwiązaniem jest wykorzystywanie danych w bierzącej sesji
+    // mozna zastosować i skonfigurować springsecurity ktory będzie automatycznie wykorzystywać sesje do logowania
+    private User loggedUser = null;
     @Autowired
     public LoginService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    void login() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Zaloguj się");
-        System.out.println("email:");
-        String email = scanner.nextLine();
-        System.out.println("hasło");
-        String password = scanner.nextLine();
-        User user = new User(email, password);
+    public boolean login(User user) {
         boolean exists = userRepository.exists(Example.of(user));
         if (exists) {
-            System.out.println("Zalogowano");
-            return;
+            loggedUser = user;
+            return true;
         }
         try {
-            throw new UserAlreadyExistException("Podany user nie istnieje");
-        } catch (UserAlreadyExistException e) {
+            throw new UserDoesntExistsException("Podany user nie istnieje");
+        } catch (UserDoesntExistsException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    public User getLoggedUser() {
+        return loggedUser;
     }
 }
 

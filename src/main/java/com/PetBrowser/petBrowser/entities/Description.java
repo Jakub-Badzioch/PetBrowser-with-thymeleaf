@@ -21,4 +21,8 @@ public class Description {
     private Long id;
     @Column(name = "descript")
     private String descript;
+
+    public Description(String descript) {
+        this.descript = descript;
+    }
 }

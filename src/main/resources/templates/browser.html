@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Browse </title>
+</head>
+<body>
+<h1> What animal are you looking for? </h1>
+<form action="/browser" method="post">
+
+    <div>
+        Order
+        <select>
+            <option selected> Carnivorous  </option>
+            <option> Rodents </option>
+            <option> Equidae </option>
+            <option> Even-hoofed </option>
+        </select>
+    </div>
+    <div>
+        Species
+        <select>
+            <option selected> Dog  </option>
+            <option> Cat </option>
+            <option> Pig </option>
+            <option> Rat </option>
+        </select>
+    </div>
+
+    <div>
+        Race
+        <select>
+            <option selected> dog </option>
+            <option> cat </option>
+            <option> pig </option>
+        </select>
+    </div>
+
+    <div>
+        Age range from <input type="number" name="youngest"> to <input type="number" name="oldest">
+    </div>
+
+    <div>
+        Sex
+        <select>
+            <option> female </option>
+            <option selected> male </option>
+        </select>
+    </div>
+
+    <button type="submit"> Confirm </button>
+
+</form>
+</body>
+</html>

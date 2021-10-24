@@ -30,4 +30,11 @@ public class Adress{
 
     @Column(name = "zip_code")
     private String zip_code;
+
+    public Adress(String country, String city, String street, String zip_code) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.zip_code = zip_code;
+    }
 }

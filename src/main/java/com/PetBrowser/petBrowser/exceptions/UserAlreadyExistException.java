@@ -1,4 +1,4 @@
-package com.PetBrowser.petBrowser.services;
+package com.PetBrowser.petBrowser.exceptions;
 
 public class UserAlreadyExistException extends Exception{
     public UserAlreadyExistException(String message) {

@@ -1,12 +1,11 @@
 package com.PetBrowser.petBrowser.services;
 
 import com.PetBrowser.petBrowser.entities.User;
+import com.PetBrowser.petBrowser.exceptions.UserAlreadyExistException;
 import com.PetBrowser.petBrowser.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import java.util.Scanner;
 
 @Service
 public class RegisterService {
@@ -18,23 +17,15 @@ public class RegisterService {
     }
 
 
-    boolean register() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Zarejestruj się");
-        System.out.println("email:");
-        String email = scanner.nextLine();
-        System.out.println("hasło");
-        String password = scanner.nextLine();
-        User user = new User(email, password);
+    public boolean register(User user) {
         boolean exists = userRepository.exists(Example.of(user));
-        if (exists) {
+        if (!exists) {
             userRepository.save(user);
-            System.out.println("Zarejestrowano");
             return true;
         }
         try {
-            throw new UserDoesntExistsException("Taki user nie istnieje");
-        } catch (UserDoesntExistsException e) {
+            throw new UserAlreadyExistException("Taki user już istnieje");
+        } catch (UserAlreadyExistException e) {
             e.printStackTrace();
         }
         return false;

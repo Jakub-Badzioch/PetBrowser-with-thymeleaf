@@ -4,23 +4,14 @@ import com.PetBrowser.petBrowser.entities.Animal;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @Component
-public class BySpeciesBrowser implements SpecificBrowser {
+public class BySpeciesBrowser {
 
-    public List<Animal> browse(List<Animal> animals) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Wyszukaj po płci: (tak/nie)");
-        String answer = scanner.nextLine();
-        if (answer.equals("tak")) {
-            System.out.println("Płeć: (male/female)");
-            String sex = scanner.nextLine();
+    public List<Animal> browse(List<Animal> animals, String species) {
             return animals.stream()
-                    .filter(a -> a.getSex().equals(sex))
+                    .filter(a -> a.getSpecies().equals(species))
                     .collect(Collectors.toList());
-        }
-        return animals;
     }
 }

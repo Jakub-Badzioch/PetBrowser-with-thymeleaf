@@ -1,17 +1,26 @@
 package com.PetBrowser.petBrowser.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
 @Entity
 @Table(name = "animal")
 public class Animal {
+
+    public Animal(String species, String race, String name, double age, String sex, Adress adress, Description description) {
+        this.species = species;
+        this.race = race;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.adress = adress;
+        this.description = description;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
